@@ -24,7 +24,7 @@ class DemoApplication : Application(), IBaseAppInject {
     override fun onCreate() {
         super.onCreate()
 
-        if (!isMainProcess(applicationContext)) {
+        if (!isMainProcess()) {
             return
         }
 

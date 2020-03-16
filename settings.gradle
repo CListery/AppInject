@@ -1,3 +1,3 @@
 include ':app', ':libapp'
-include ':libappinject'
+include ':lib_appinject'
 rootProject.name='AppInject'

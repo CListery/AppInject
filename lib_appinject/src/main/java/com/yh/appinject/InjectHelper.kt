@@ -40,7 +40,7 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
 
     open fun register(inject: Inject) {
         mInject = inject
-        if (inject.getApplication().isMainProcess(ctx())) {
+        if (inject.getApplication().isMainProcess()) {
             ActLifeCallback.get().register(inject.getApplication())
         }
         init()

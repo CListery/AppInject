@@ -5,6 +5,6 @@ package com.yh.appinject.lifecycle
  */
 interface IAppForegroundEvent {
     
-    fun onForegroundStateChange(isForeground: Boolean)
+    fun onForegroundStateChange(isForeground: Boolean) {}
     
 }

@@ -50,6 +50,9 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
         LogW(TAG, "onActivityCreated act: $activity -> bundle: $bundle")
+        mEventList.filterIsInstance<IActStatusEvent>().forEach {
+            it.onCreate(activity)
+        }
     }
     
     override fun onActivityStarted(activity: Activity) {
@@ -66,10 +69,16 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     
     override fun onActivityResumed(activity: Activity) {
         LogW(TAG, "onActivityResumed: $activity")
+        mEventList.filterIsInstance<IActStatusEvent>().forEach {
+            it.onShow(activity)
+        }
     }
     
     override fun onActivityPaused(activity: Activity) {
         LogW(TAG, "onActivityPaused: $activity")
+        mEventList.filterIsInstance<IActStatusEvent>().forEach {
+            it.onHide(activity)
+        }
     }
     
     override fun onActivityStopped(activity: Activity) {
@@ -86,6 +95,9 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     
     override fun onActivityDestroyed(activity: Activity) {
         LogW(TAG, "onActivityDestroyed: $activity")
+        mEventList.filterIsInstance<IActStatusEvent>().forEach {
+            it.onDestroyed(activity)
+        }
     }
     
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
