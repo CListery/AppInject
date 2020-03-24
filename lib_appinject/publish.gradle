@@ -1,0 +1,15 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.novoda.bintray-release'
+
+// jcenter configuration for novoda's bintray-release
+// $ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+publish {
+    override = true
+    userOrg = 'clistery'
+    groupId = 'com.clistery.app'
+    artifactId = 'appinject'
+    publishVersion = VERSION_NAME
+    desc = 'Quickly inject application and context into your dependencies'
+    website = 'https://github.com/CListery/AppInject'
+}
+
