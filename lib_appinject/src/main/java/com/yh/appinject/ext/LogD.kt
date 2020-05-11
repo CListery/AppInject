@@ -8,19 +8,19 @@ import com.yh.appinject.BuildConfig
  */
 
 fun LogD(tag: String, msg: Any) {
-    if (BuildConfig.ENABLE_DEBUG) {
+    if (BuildConfig.DEBUG) {
         Log.d(tag, msg.toString())
     }
 }
 
 fun LogW(tag: String, msg: Any) {
-    if (BuildConfig.ENABLE_DEBUG) {
+    if (BuildConfig.DEBUG) {
         Log.w(tag, msg.toString())
     }
 }
 
 fun LogE(tag: String, msg: Any, throws: Throwable? = null) {
-    if (BuildConfig.ENABLE_DEBUG) {
+    if (BuildConfig.DEBUG) {
         if (null == throws) {
             Log.e(tag, msg.toString())
         } else {
