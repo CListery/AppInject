@@ -3,18 +3,17 @@ package com.yh.appinject.lifecycle
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.yh.appinject.ext.LogW
+import com.yh.appinject.logger.LibLogs
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Created by CYH on 2019-12-19 13:37
  */
-class ActLifeCallback private constructor() : Application.ActivityLifecycleCallbacks {
+internal class ActLifeCallback private constructor() : Application.ActivityLifecycleCallbacks {
     
     companion object {
         private const val TAG = "ActLifeCallback"
-        
         @JvmStatic
         private val mInstances: ActLifeCallback by lazy { ActLifeCallback() }
         
@@ -25,13 +24,11 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     private val mIsRegistered = AtomicBoolean(false)
     private val mForegroundActCount = AtomicInteger(0)
     private val mIsChangingConfiguration = AtomicBoolean(false)
-    
     private val mForegroundStatus = AtomicBoolean(false)
-    
     private val mEventList = ArrayList<IAppForegroundEvent>()
     
     fun register(app: Application) {
-        if (mIsRegistered.compareAndSet(false, true)) {
+        if(mIsRegistered.compareAndSet(false, true)) {
             app.registerActivityLifecycleCallbacks(this)
         }
     }
@@ -39,7 +36,7 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     fun isForeground() = mForegroundStatus.get()
     
     fun pushListener(iAppForegroundEvent: IAppForegroundEvent) {
-        if (!mEventList.contains(iAppForegroundEvent)) {
+        if(!mEventList.contains(iAppForegroundEvent)) {
             mEventList.add(iAppForegroundEvent)
         }
     }
@@ -49,18 +46,18 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     }
     
     override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-        LogW(TAG, "onActivityCreated act: $activity -> bundle: $bundle")
+        LibLogs.logD("onActivityCreated act: $activity -> bundle: $bundle", TAG)
         mEventList.filterIsInstance<IActStatusEvent>().forEach {
             it.onCreate(activity)
         }
     }
     
     override fun onActivityStarted(activity: Activity) {
-        LogW(TAG, "onActivityStarted: $activity")
-        if (1 == mForegroundActCount.incrementAndGet() && !mIsChangingConfiguration.get()) {
+        LibLogs.logD("onActivityStarted: $activity", TAG)
+        if(1 == mForegroundActCount.incrementAndGet() && !mIsChangingConfiguration.get()) {
             // 应用切到前台
-            if (mForegroundStatus.compareAndSet(false, true)) {
-                LogW(TAG, "enter FG: $activity")
+            if(mForegroundStatus.compareAndSet(false, true)) {
+                LibLogs.logD("enter FG: $activity", TAG)
                 mEventList.toArray(arrayOf<IAppForegroundEvent>()).forEach { it.onForegroundStateChange(true) }
             }
         }
@@ -68,25 +65,25 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     }
     
     override fun onActivityResumed(activity: Activity) {
-        LogW(TAG, "onActivityResumed: $activity")
+        LibLogs.logD("onActivityResumed: $activity", TAG)
         mEventList.filterIsInstance<IActStatusEvent>().forEach {
             it.onShow(activity)
         }
     }
     
     override fun onActivityPaused(activity: Activity) {
-        LogW(TAG, "onActivityPaused: $activity")
+        LibLogs.logD("onActivityPaused: $activity", TAG)
         mEventList.filterIsInstance<IActStatusEvent>().forEach {
             it.onHide(activity)
         }
     }
     
     override fun onActivityStopped(activity: Activity) {
-        LogW(TAG, "onActivityStopped: $activity")
-        if (0 == mForegroundActCount.decrementAndGet()) {
+        LibLogs.logD("onActivityStopped: $activity", TAG)
+        if(0 == mForegroundActCount.decrementAndGet()) {
             // 应用切到后台
-            if (mForegroundStatus.compareAndSet(true, false)) {
-                LogW(TAG, "enter BG: $activity")
+            if(mForegroundStatus.compareAndSet(true, false)) {
+                LibLogs.logD("enter BG: $activity", TAG)
                 mEventList.toArray(arrayOf<IAppForegroundEvent>()).forEach { it.onForegroundStateChange(false) }
             }
         }
@@ -94,13 +91,13 @@ class ActLifeCallback private constructor() : Application.ActivityLifecycleCallb
     }
     
     override fun onActivityDestroyed(activity: Activity) {
-        LogW(TAG, "onActivityDestroyed: $activity")
+        LibLogs.logD("onActivityDestroyed: $activity", TAG)
         mEventList.filterIsInstance<IActStatusEvent>().forEach {
             it.onDestroyed(activity)
         }
     }
     
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-        LogW(TAG, "onActivitySaveInstanceState act: $activity -> bundle: $outState")
+        LibLogs.logD("onActivitySaveInstanceState act: $activity -> bundle: $outState", TAG)
     }
 }

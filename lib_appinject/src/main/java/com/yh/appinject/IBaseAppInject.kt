@@ -8,8 +8,19 @@ import androidx.annotation.DrawableRes
  */
 interface IBaseAppInject {
     
+    /**
+     * APP context
+     */
     fun getApplication(): Application
-    fun showTipMsg(errorMsg: String)
+    
+    /**
+     * Show tip
+     */
+    fun showTipMsg(msg: String)
+    
+    /**
+     * Notification icon
+     */
     @DrawableRes
     fun getNotificationIcon(): Int
 }

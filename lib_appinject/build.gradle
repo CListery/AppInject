@@ -16,10 +16,12 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode VERSION_CODE
         versionName VERSION_NAME
+
+        buildConfigField('int', 'LOG_METHOD_COUNT', '2')
     }
     lintOptions {
         abortOnError false
