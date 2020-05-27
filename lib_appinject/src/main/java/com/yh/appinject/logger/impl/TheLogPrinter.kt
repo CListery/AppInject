@@ -54,9 +54,9 @@ internal class TheLogPrinter : Printer {
         return this
     }
     
-    override fun d(@Nullable message: Any?) {
-        log(Log.DEBUG, null, message?.toString())
-    }
+    //    override fun d(@Nullable message: Any?) {
+    //        log(Log.DEBUG, null, message?.toString())
+    //    }
     
     override fun d(@NonNull message: String, @Nullable vararg args: Any?) {
         log(Log.DEBUG, null, message, *args)
@@ -143,13 +143,22 @@ internal class TheLogPrinter : Printer {
         }
     }
     
-    override fun xml(xml: String?) {
-        if(null == xml || TextUtils.isEmpty(xml)) {
-            d("Empty/Null xml content")
+    override fun xml(xml: Any?) {
+        if(null == xml) {
+            d("Null xml content")
+            return
+        }
+        val newXml = (xml as? CharSequence)?.toString()
+        if(null == newXml) {
+            d("Not is xml content: $xml")
+            return
+        }
+        if(TextUtils.isEmpty(newXml)) {
+            d("Empty xml content")
             return
         }
         try {
-            val xmlInput: Source = StreamSource(StringReader(xml))
+            val xmlInput: Source = StreamSource(StringReader(newXml))
             val xmlOutput = StreamResult(StringWriter())
             val transformer = TransformerFactory.newInstance().newTransformer()
             transformer.setOutputProperty(OutputKeys.INDENT, "yes")
@@ -169,7 +178,7 @@ internal class TheLogPrinter : Printer {
         val builder = StringBuilder()
         if(justCurrentRow) {
             cursorCurRow(cursor, builder)
-            d(builder)
+            d(builder.toString())
             return
         }
         val startPos = cursor.position
@@ -181,7 +190,7 @@ internal class TheLogPrinter : Printer {
             builder.deleteCharAt(builder.length - 1)
         }
         cursor.moveToPosition(startPos)
-        d(builder)
+        d(builder.toString())
     }
     
     private fun cursorCurRow(cursor: Cursor, builder: StringBuilder) {
@@ -255,15 +264,28 @@ internal class TheLogPrinter : Printer {
     
     @NonNull
     private fun createMessage(@Nullable message: String?, @Nullable vararg args: Any?): String {
-        if(null == message) return ""
-        return if(args.filterNotNull().isEmpty()) {
-            message
+        val newMsg = message
+            ?: ""
+        return if(TextUtils.isEmpty(newMsg)) {
+            if(args.isNotEmpty()) {
+                args.contentToString()
+            } else {
+                newMsg
+            }
         } else {
-            String.format(message, *args)
+            if(args.isNotEmpty()) {
+                try {
+                    String.format(newMsg, *args)
+                } catch (e: Exception) {
+                    newMsg.plus(args.contentToString())
+                }
+            } else {
+                newMsg
+            }
         }
     }
     
-    private fun getStackTraceString(t: Throwable): String? {
+    private fun getStackTraceString(t: Throwable): String {
         // Don't replace this with Log.getStackTraceString() - it hides
         // UnknownHostException, which is not what we want.
         val sw = StringWriter(256)

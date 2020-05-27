@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.yh.appinject.logger.LibLogs
+import com.yh.appinject.logger.LogsManager
 import com.yh.appinject.logger.impl.TheLogAdapter
 import com.yh.appinject.logger.impl.TheLogFormatStrategy
 import com.yh.appinject.logger.logD
 import com.yh.appinject.logger.logE
 import com.yh.appinject.logger.logJSON
+import com.yh.appinject.logger.logW
 import com.yh.libapp.A
 
 /**
@@ -29,7 +31,7 @@ class MainAct : Activity() {
         Log.d("Tag", "I'm a log which you don't see easily, hehe")
         Log.d("json content", "{ \"key\": 3, \n \"value\": something}")
         Log.e("error", "There is a crash somewhere or any warning")
-        //        LogsManager.get().setDefLoggerConfig(appConfig = Pair(true, Log.VERBOSE))
+        LogsManager.get().setDefLoggerConfig(appConfig = Pair(true, Log.VERBOSE))
         logE("Custom tag for only one use", "tag")
         logJSON("{ \"key\": 3, \"value\": something}")
         logD("this is a arr: ${listOf("foo", "bar")}")
@@ -37,6 +39,11 @@ class MainAct : Activity() {
         map["key"] = "value"
         map["key1"] = "value2"
         logD("this is a map: \n$map")
+        
+        logD(this)
+        logE(this)
+        logE(RuntimeException("hhhhh"))
+        logW(null)
         
         val cursor = MatrixCursor(arrayOf("id", "name", "age", "len"))
         cursor.newRow().add("id", 1).add("name", "cyh").add("age", 10).add("len", 109.6)

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.yh.appinject.logger
 
 import android.database.Cursor
@@ -11,32 +13,37 @@ object LibLogs {
     
     @JvmStatic
     @JvmOverloads
-    fun logD(@NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
-        LogsManager.get().with(logAdapter).t(tag)?.d(msg, *args)
+    fun logD(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
+        LogsManager.get().with(logAdapter).t(tag)?.d(msg?.toString()
+            ?: "", *args)
     }
     
     @JvmStatic
     @JvmOverloads
-    fun logE(@NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable throwable: Throwable? = null, @Nullable vararg args: Any?) {
-        LogsManager.get().with(logAdapter).t(tag)?.e(throwable, msg, *args)
+    fun logE(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable throwable: Throwable? = null, @Nullable vararg args: Any?) {
+        LogsManager.get().with(logAdapter).t(tag)?.e(throwable, msg?.toString()
+            ?: "", *args)
     }
     
     @JvmStatic
     @JvmOverloads
-    fun logI(@NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
-        LogsManager.get().with(logAdapter).t(tag)?.i(msg, *args)
+    fun logI(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
+        LogsManager.get().with(logAdapter).t(tag)?.i(msg?.toString()
+            ?: "", *args)
     }
     
     @JvmStatic
     @JvmOverloads
-    fun logV(@NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
-        LogsManager.get().with(logAdapter).t(tag)?.v(msg, *args)
+    fun logV(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
+        LogsManager.get().with(logAdapter).t(tag)?.v(msg?.toString()
+            ?: "", *args)
     }
     
     @JvmStatic
     @JvmOverloads
-    fun logW(@NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
-        LogsManager.get().with(logAdapter).t(tag)?.w(msg, *args)
+    fun logW(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
+        LogsManager.get().with(logAdapter).t(tag)?.w(msg?.toString()
+            ?: "", *args)
     }
     
     /**
@@ -45,8 +52,9 @@ object LibLogs {
      */
     @JvmStatic
     @JvmOverloads
-    fun logWTF(@NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
-        LogsManager.get().with(logAdapter).t(tag)?.wtf(msg, *args)
+    fun logWTF(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable vararg args: Any?) {
+        LogsManager.get().with(logAdapter).t(tag)?.wtf(msg?.toString()
+            ?: "", *args)
     }
     
     /**
@@ -63,7 +71,7 @@ object LibLogs {
      */
     @JvmStatic
     @JvmOverloads
-    fun logXML(@Nullable xml: String?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null) {
+    fun logXML(@Nullable xml: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null) {
         LogsManager.get().with(logAdapter).t(tag)?.xml(xml)
     }
     
@@ -82,7 +90,8 @@ object LibLogs {
      */
     @JvmStatic
     @JvmOverloads
-    fun logP(@NonNull priority: Int, @NonNull msg: String, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable throwable: Throwable? = null) {
-        LogsManager.get().with(logAdapter).log(priority, tag, msg, throwable)
+    fun logP(@NonNull priority: Int, @NonNull msg: Any?, @Nullable tag: String? = null, @Nullable logAdapter: LogAdapter? = null, @Nullable throwable: Throwable? = null) {
+        LogsManager.get().with(logAdapter).log(priority, tag, msg?.toString()
+            ?: "", throwable)
     }
 }

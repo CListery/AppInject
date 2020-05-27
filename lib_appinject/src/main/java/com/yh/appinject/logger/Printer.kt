@@ -13,7 +13,7 @@ interface Printer {
     fun addAdapter(@NonNull adapter: LogAdapter?)
     fun clearLogAdapters()
     fun t(@Nullable tag: String?): Printer?
-    fun d(@Nullable message: Any?)
+//    fun d(@Nullable message: Any?)
     fun d(@NonNull message: String, @Nullable vararg args: Any?)
     fun i(@NonNull message: String, @Nullable vararg args: Any?)
     fun v(@NonNull message: String, @Nullable vararg args: Any?)
@@ -29,7 +29,7 @@ interface Printer {
     /**
      * Formats the given xml content and print it
      */
-    fun xml(@Nullable xml: String?)
+    fun xml(xml: Any?)
     
     /**
      * Formats the given cursor content and print it

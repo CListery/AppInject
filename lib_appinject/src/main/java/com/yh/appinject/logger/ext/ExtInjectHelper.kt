@@ -21,27 +21,27 @@ import com.yh.appinject.logger.logXML
  * Created by CYH on 2020/5/16 22:29
  */
 @JvmOverloads
-fun InjectHelper<*>.libD(@NonNull msg: String, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
+fun InjectHelper<*>.libD(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logD(msg, tag, this, *args)
 }
 
 @JvmOverloads
-fun InjectHelper<*>.libE(@NonNull msg: String, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null, @Nullable vararg args: Any?) {
+fun InjectHelper<*>.libE(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null, @Nullable vararg args: Any?) {
     logE(msg, tag, this, throwable, *args)
 }
 
 @JvmOverloads
-fun InjectHelper<*>.libI(@NonNull msg: String, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
+fun InjectHelper<*>.libI(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logI(msg, tag, this, *args)
 }
 
 @JvmOverloads
-fun InjectHelper<*>.libV(@NonNull msg: String, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
+fun InjectHelper<*>.libV(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logV(msg, tag, this, *args)
 }
 
 @JvmOverloads
-fun InjectHelper<*>.libW(@NonNull msg: String, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
+fun InjectHelper<*>.libW(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logW(msg, tag, this, *args)
 }
 
@@ -50,7 +50,7 @@ fun InjectHelper<*>.libW(@NonNull msg: String, @Nullable tag: String? = null, @N
  * ie: Unexpected errors etc
  */
 @JvmOverloads
-fun InjectHelper<*>.libWTF(@NonNull msg: String, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
+fun InjectHelper<*>.libWTF(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logWTF(msg, tag, this, *args)
 }
 
@@ -66,7 +66,7 @@ fun InjectHelper<*>.libJSON(@Nullable json: Any?, @Nullable tag: String? = null)
  * Formats the given xml content and print it
  */
 @JvmOverloads
-fun InjectHelper<*>.libXML(@Nullable xml: String?, @Nullable tag: String? = null) {
+fun InjectHelper<*>.libXML(@Nullable xml: Any?, @Nullable tag: String? = null) {
     logXML(xml, tag, this)
 }
 
@@ -83,6 +83,6 @@ fun InjectHelper<*>.libCursor(@Nullable cursor: Cursor?, @NonNull justCurRow: Bo
  * function that accepts all configurations as parameter
  */
 @JvmOverloads
-fun InjectHelper<*>.libP(@NonNull priority: Int, @NonNull msg: String, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null) {
+fun InjectHelper<*>.libP(@NonNull priority: Int, @NonNull msg: Any?, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null) {
     logP(priority, msg, tag, this, throwable)
 }
