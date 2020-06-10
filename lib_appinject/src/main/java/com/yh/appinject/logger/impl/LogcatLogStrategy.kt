@@ -10,7 +10,7 @@ import com.yh.appinject.logger.LogStrategy
  * This simply prints out all logs to Logcat by using standard [Log] class.
  */
 class LogcatLogStrategy : LogStrategy {
-    
+
     override fun log(priority: Int, @NonNull tag: String, @NonNull message: String) {
         Log.println(priority, tag, message)
     }

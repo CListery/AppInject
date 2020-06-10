@@ -7,24 +7,38 @@ import com.yh.appinject.logger.FormatStrategy
 import com.yh.appinject.logger.LogAdapter
 
 /**
+ * 默认日志适配器
+ *
+ * @property formatStrategy
+ *
  * Created by CYH on 2020/5/14 17:26
  */
 class TheLogAdapter(private val formatStrategy: FormatStrategy) : LogAdapter {
-    
+
     private var loggerConfig: Pair<Boolean, Int> = Pair(false, Log.ASSERT)
-    
+
+    /**
+     * 是否启用
+     */
     fun isEnable() = loggerConfig.first
+
+    /**
+     * 日志等级
+     */
     fun logLevel() = loggerConfig.second
-    
+
+    /**
+     * 设置日志等级及开关
+     */
     fun setConfig(config: Pair<Boolean, Int>): TheLogAdapter {
         loggerConfig = config
         return this
     }
-    
+
     override fun isLoggable(priority: Int, tag: String?): Boolean {
         return loggerConfig.first && priority >= loggerConfig.second
     }
-    
+
     override fun log(priority: Int, @Nullable tag: String?, @NonNull message: String) {
         formatStrategy.log(priority, tag, message)
     }

@@ -6,48 +6,58 @@ import android.database.Cursor
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.yh.appinject.InjectHelper
-import com.yh.appinject.logger.logCursor
-import com.yh.appinject.logger.logD
-import com.yh.appinject.logger.logE
-import com.yh.appinject.logger.logI
-import com.yh.appinject.logger.logJSON
-import com.yh.appinject.logger.logP
-import com.yh.appinject.logger.logV
-import com.yh.appinject.logger.logW
-import com.yh.appinject.logger.logWTF
-import com.yh.appinject.logger.logXML
+import com.yh.appinject.logger.*
 
 /**
+ * 库日志输出工具
+ *
+ * 根据[com.yh.appinject.InjectHelper]区分
+ *
  * Created by CYH on 2020/5/16 22:29
+ */
+
+/**
+ * @see logD
  */
 @JvmOverloads
 fun InjectHelper<*>.libD(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logD(msg, tag, this, *args)
 }
 
+/**
+ * @see logE
+ */
 @JvmOverloads
 fun InjectHelper<*>.libE(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null, @Nullable vararg args: Any?) {
     logE(msg, tag, this, throwable, *args)
 }
 
+/**
+ * @see logI
+ */
 @JvmOverloads
 fun InjectHelper<*>.libI(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logI(msg, tag, this, *args)
 }
 
+/**
+ * @see logV
+ */
 @JvmOverloads
 fun InjectHelper<*>.libV(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logV(msg, tag, this, *args)
 }
 
+/**
+ * @see logW
+ */
 @JvmOverloads
 fun InjectHelper<*>.libW(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
     logW(msg, tag, this, *args)
 }
 
 /**
- * Tip: Use this for exceptional situations to log
- * ie: Unexpected errors etc
+ * @see logWTF
  */
 @JvmOverloads
 fun InjectHelper<*>.libWTF(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
@@ -55,7 +65,7 @@ fun InjectHelper<*>.libWTF(@NonNull msg: Any?, @Nullable tag: String? = null, @N
 }
 
 /**
- * Formats the given json content and print it
+ * @see logJSON
  */
 @JvmOverloads
 fun InjectHelper<*>.libJSON(@Nullable json: Any?, @Nullable tag: String? = null) {
@@ -63,7 +73,7 @@ fun InjectHelper<*>.libJSON(@Nullable json: Any?, @Nullable tag: String? = null)
 }
 
 /**
- * Formats the given xml content and print it
+ * @see logXML
  */
 @JvmOverloads
 fun InjectHelper<*>.libXML(@Nullable xml: Any?, @Nullable tag: String? = null) {
@@ -71,7 +81,7 @@ fun InjectHelper<*>.libXML(@Nullable xml: Any?, @Nullable tag: String? = null) {
 }
 
 /**
- * Formats the given cursor content and print it
+ * @see logCursor
  */
 @JvmOverloads
 fun InjectHelper<*>.libCursor(@Nullable cursor: Cursor?, @NonNull justCurRow: Boolean = false, @Nullable tag: String? = null) {
@@ -79,8 +89,7 @@ fun InjectHelper<*>.libCursor(@Nullable cursor: Cursor?, @NonNull justCurRow: Bo
 }
 
 /**
- * General log @JvmOverloads
- * function that accepts all configurations as parameter
+ * @see logP
  */
 @JvmOverloads
 fun InjectHelper<*>.libP(@NonNull priority: Int, @NonNull msg: Any?, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null) {

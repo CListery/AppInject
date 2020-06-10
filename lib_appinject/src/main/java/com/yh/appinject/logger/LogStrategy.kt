@@ -1,19 +1,19 @@
 package com.yh.appinject.logger
 
+import android.util.Log
 import androidx.annotation.NonNull
 
 /**
- * Determines destination target for the logs such as Disk, Logcat etc.
+ * 日志输出方式的抽象接口，如磁盘、Logcat、网络等
  */
 interface LogStrategy {
-    
+
     /**
-     * This is invoked by Logger each time a log message is processed.
-     * Interpret this method as last destination of the log in whole pipeline.
+     * 每次处理日志消息时，[Printer]都会调用此方法。将此方法解释为整个管道中日志的最后目的地
      *
-     * @param priority is the log level e.g. DEBUG, WARNING
-     * @param tag      is the given tag for the log message.
-     * @param message  is the given message for the log message.
+     * @param [priority] 日志级别，例如 [Log.DEBUG]、[Log.WARN]
+     * @param [tag]      日志消息的给定标签
+     * @param [message]  要输出的日志内容
      */
     fun log(priority: Int, @NonNull tag: String, @NonNull message: String)
 }

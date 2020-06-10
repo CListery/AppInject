@@ -1,29 +1,29 @@
 package com.yh.appinject.logger
 
+import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 
 /**
- * Provides a common interface to emits logs through. This is a required contract for Logger.
+ * 日志适配器的抽象接口
  */
 interface LogAdapter {
-    
+
     /**
-     * Used to determine whether log should be printed out or not.
-     * @param priority is the log level e.g. DEBUG, WARNING
-     * @param tag is the given tag for the log message
+     * 判断该适配器是否能输出这条日志
      *
-     * @return is used to determine if log should printed.
-     * If it is true, it will be printed, otherwise it'll be ignored.
+     * @param [priority] 日志级别，例如 [Log.DEBUG]、[Log.WARN]
+     * @param [tag]      日志消息的给定标签
+     * @return 是否能输出日志
      */
     fun isLoggable(priority: Int, @Nullable tag: String?): Boolean
-    
+
     /**
-     * Each log will use this pipeline
+     * 使用该适配器输出这条日志
      *
-     * @param priority is the log level e.g. DEBUG, WARNING
-     * @param tag is the given tag for the log message.
-     * @param message is the given message for the log message.
+     * @param [priority] 日志级别，例如 [Log.DEBUG]、[Log.WARN]
+     * @param [tag]      日志消息的给定标签
+     * @param [message]  要输出的日志内容
      */
     fun log(priority: Int, @Nullable tag: String?, @NonNull message: String)
 }
