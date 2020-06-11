@@ -223,20 +223,20 @@ internal class TheLogPrinter : Printer {
     }
 
     override fun log(priority: Int, tag: String?, message: String?, throwable: Throwable?) {
-        var newMsg = message
-        if (throwable != null && message != null) {
-            newMsg += " : " + getStackTraceString(throwable)
+        val newMsg = StringBuilder(message ?: "")
+        if (null != throwable) {
+            if (!TextUtils.isEmpty(newMsg)) {
+                newMsg.append(" : ")
+            }
+            newMsg.append(getStackTraceString(throwable))
         }
-        if (throwable != null && message == null) {
-            newMsg = getStackTraceString(throwable)
-        }
-        if (null == newMsg || TextUtils.isEmpty(message)) {
-            newMsg = "Empty/NULL log message"
+        if (TextUtils.isEmpty(newMsg)) {
+            newMsg.append("Empty/NULL log message")
         }
         val adapter = getAdapter()
             ?: return
         if (adapter.isLoggable(priority, tag)) {
-            adapter.log(priority, tag, newMsg)
+            adapter.log(priority, tag, newMsg.toString())
         }
     }
 
