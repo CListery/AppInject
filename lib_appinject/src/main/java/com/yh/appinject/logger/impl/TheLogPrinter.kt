@@ -5,6 +5,9 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.core.database.getBlobOrNull
+import androidx.core.database.getFloatOrNull
+import androidx.core.database.getIntOrNull
 import androidx.core.database.getStringOrNull
 import com.yh.appinject.logger.LogAdapter
 import com.yh.appinject.logger.Printer
@@ -215,11 +218,19 @@ internal class TheLogPrinter : Printer {
     }
 
     private fun getCursorColValue(cursor: Cursor, colIndex: Int): String {
-        if (-1 == colIndex) {
-            return "<UNKNOWN>"
+        if(-1 == colIndex) return "<ERR INDEX>"
+    
+        cursor.apply {
+            return when(cursor.getType(colIndex)) {
+                Cursor.FIELD_TYPE_NULL    -> "<NULL>"
+                Cursor.FIELD_TYPE_INTEGER -> getIntOrNull(colIndex)
+                Cursor.FIELD_TYPE_FLOAT   -> getFloatOrNull(colIndex)
+                Cursor.FIELD_TYPE_STRING  -> getStringOrNull(colIndex)
+                Cursor.FIELD_TYPE_BLOB    -> getBlobOrNull(colIndex)
+                else                      -> "<UNKNOWN>"
+            }?.toString()
+                ?: "<NULL>"
         }
-        return cursor.getStringOrNull(colIndex)
-            ?: "<NULL>"
     }
 
     override fun log(priority: Int, tag: String?, message: String?, throwable: Throwable?) {
