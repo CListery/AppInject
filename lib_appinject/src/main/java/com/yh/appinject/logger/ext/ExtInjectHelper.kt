@@ -17,7 +17,7 @@ import com.yh.appinject.logger.*
  */
 
 /**
- * @see logD
+ * @see com.yh.appinject.logger.logD
  */
 @JvmOverloads
 fun InjectHelper<*>.libD(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
@@ -25,7 +25,7 @@ fun InjectHelper<*>.libD(@NonNull msg: Any?, @Nullable tag: String? = null, @Nul
 }
 
 /**
- * @see logE
+ * @see com.yh.appinject.logger.logE
  */
 @JvmOverloads
 fun InjectHelper<*>.libE(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null, @Nullable vararg args: Any?) {
@@ -33,7 +33,7 @@ fun InjectHelper<*>.libE(@NonNull msg: Any?, @Nullable tag: String? = null, @Nul
 }
 
 /**
- * @see logI
+ * @see com.yh.appinject.logger.logI
  */
 @JvmOverloads
 fun InjectHelper<*>.libI(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
@@ -41,7 +41,7 @@ fun InjectHelper<*>.libI(@NonNull msg: Any?, @Nullable tag: String? = null, @Nul
 }
 
 /**
- * @see logV
+ * @see com.yh.appinject.logger.logV
  */
 @JvmOverloads
 fun InjectHelper<*>.libV(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
@@ -49,7 +49,7 @@ fun InjectHelper<*>.libV(@NonNull msg: Any?, @Nullable tag: String? = null, @Nul
 }
 
 /**
- * @see logW
+ * @see com.yh.appinject.logger.logW
  */
 @JvmOverloads
 fun InjectHelper<*>.libW(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
@@ -57,7 +57,7 @@ fun InjectHelper<*>.libW(@NonNull msg: Any?, @Nullable tag: String? = null, @Nul
 }
 
 /**
- * @see logWTF
+ * @see com.yh.appinject.logger.logWTF
  */
 @JvmOverloads
 fun InjectHelper<*>.libWTF(@NonNull msg: Any?, @Nullable tag: String? = null, @Nullable vararg args: Any?) {
@@ -65,7 +65,7 @@ fun InjectHelper<*>.libWTF(@NonNull msg: Any?, @Nullable tag: String? = null, @N
 }
 
 /**
- * @see logJSON
+ * @see com.yh.appinject.logger.logJSON
  */
 @JvmOverloads
 fun InjectHelper<*>.libJSON(@Nullable json: Any?, @Nullable tag: String? = null) {
@@ -73,7 +73,7 @@ fun InjectHelper<*>.libJSON(@Nullable json: Any?, @Nullable tag: String? = null)
 }
 
 /**
- * @see logXML
+ * @see com.yh.appinject.logger.logXML
  */
 @JvmOverloads
 fun InjectHelper<*>.libXML(@Nullable xml: Any?, @Nullable tag: String? = null) {
@@ -81,7 +81,7 @@ fun InjectHelper<*>.libXML(@Nullable xml: Any?, @Nullable tag: String? = null) {
 }
 
 /**
- * @see logCursor
+ * @see com.yh.appinject.logger.logCursor
  */
 @JvmOverloads
 fun InjectHelper<*>.libCursor(@Nullable cursor: Cursor?, @NonNull justCurRow: Boolean = false, @Nullable tag: String? = null) {
@@ -89,7 +89,7 @@ fun InjectHelper<*>.libCursor(@Nullable cursor: Cursor?, @NonNull justCurRow: Bo
 }
 
 /**
- * @see logP
+ * @see com.yh.appinject.logger.logP
  */
 @JvmOverloads
 fun InjectHelper<*>.libP(@NonNull priority: Int, @NonNull msg: Any?, @Nullable tag: String? = null, @Nullable throwable: Throwable? = null) {
