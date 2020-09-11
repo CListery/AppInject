@@ -16,5 +16,10 @@
       <option name="name" value="maven" />
       <option name="url" value="http://jfrog.fx:8081/artifactory/libs-release/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="http://jfrog.fx:8088/artifactory/libs-release/" />
+    </remote-repository>
   </component>
 </project>
