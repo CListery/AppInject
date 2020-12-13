@@ -17,4 +17,6 @@ interface FormatStrategy {
      * @param [message]  要输出的日志内容
      */
     fun log(priority: Int, @Nullable onceOnlyTag: String?, @NonNull message: String)
+    
+    fun release()
 }

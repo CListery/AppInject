@@ -14,4 +14,8 @@ class LogcatLogStrategy : LogStrategy {
     override fun log(priority: Int, @NonNull tag: String, @NonNull message: String) {
         Log.println(priority, tag, message)
     }
+    
+    override fun release() {
+    
+    }
 }

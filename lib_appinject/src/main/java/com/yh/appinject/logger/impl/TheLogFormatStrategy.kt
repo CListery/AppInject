@@ -167,7 +167,11 @@ class TheLogFormatStrategy private constructor(builder: Builder) : FormatStrateg
             firstTag
         }
     }
-
+    
+    override fun release() {
+        logStrategy.release()
+    }
+    
     class Builder {
         /**
          * 日志跟踪行数

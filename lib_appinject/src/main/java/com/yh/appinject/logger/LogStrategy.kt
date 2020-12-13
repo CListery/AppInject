@@ -16,4 +16,6 @@ interface LogStrategy {
      * @param [message]  要输出的日志内容
      */
     fun log(priority: Int, @NonNull tag: String, @NonNull message: String)
+    
+    fun release()
 }

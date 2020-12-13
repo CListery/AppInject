@@ -42,4 +42,8 @@ class TheLogAdapter(private val formatStrategy: FormatStrategy) : LogAdapter {
     override fun log(priority: Int, @Nullable tag: String?, @NonNull message: String) {
         formatStrategy.log(priority, tag, message)
     }
+    
+    override fun release() {
+        formatStrategy.release()
+    }
 }
