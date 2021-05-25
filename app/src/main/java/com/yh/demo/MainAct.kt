@@ -14,6 +14,10 @@ import com.yh.appinject.logger.logD
 import com.yh.appinject.logger.logE
 import com.yh.appinject.logger.logJSON
 import com.yh.appinject.logger.logW
+import com.yh.demo.server.CrashJobServer
+import com.yh.demo.server.MyJobServer
+import com.yh.demo.server.TimerIntentServer
+import com.yh.demo.server.TimerJobServer
 import com.yh.libapp.A
 
 /**
@@ -21,7 +25,10 @@ import com.yh.libapp.A
  */
 class MainAct : Activity() {
     
-    private val mLoggerAdapter = TheLogAdapter(TheLogFormatStrategy.newBuilder().setFirstTag("MainAct").build()).setConfig(true to Log.VERBOSE)
+    private val mLoggerAdapter =
+        TheLogAdapter(TheLogFormatStrategy.newBuilder().setFirstTag("MainAct").build()).setConfig(
+            true to Log.VERBOSE
+        )
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +51,6 @@ class MainAct : Activity() {
         logE(this)
         logE(RuntimeException("hhhhh"))
         logW(null)
-        
         val cursor = MatrixCursor(arrayOf("id", "name", "age", "len"))
         cursor.newRow().add("id", 1).add("name", "cyh").add("age", 10).add("len", 109.6)
         cursor.newRow().add("id", 2).add("name", "cyh").add("age", 15).add("len", 138.75)
@@ -70,5 +76,25 @@ class MainAct : Activity() {
     override fun onResume() {
         logD("onResume")
         super.onResume()
+    }
+    
+    fun startServer(view: View) {
+        logD("startServer")
+        MyJobServer.enqueueWork(this)
+    }
+    
+    fun startCrashServer(view: View) {
+        logD("startCrashServer")
+        CrashJobServer.enqueueWork(this)
+    }
+    
+    fun startTimerIntentServer(view: View) {
+        logD("startTimerIntentServer")
+        startService(Intent(this, TimerIntentServer::class.java))
+    }
+    
+    fun startTimerJobServer(view: View) {
+        logD("startTimerJobServer")
+        TimerJobServer.enqueueWork(this)
     }
 }

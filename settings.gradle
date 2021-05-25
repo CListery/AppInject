@@ -1,3 +1,0 @@
-include ':app', ':libapp'
-include ':lib_appinject'
-rootProject.name='AppInject'

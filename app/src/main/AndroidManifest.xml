@@ -18,5 +18,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecAct" />
+        <service
+            android:name=".server.MyJobServer"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".server.CrashJobServer"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".server.TimerJobServer"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".server.TimerIntentServer" />
     </application>
 </manifest>
