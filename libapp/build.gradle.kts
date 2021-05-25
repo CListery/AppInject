@@ -37,5 +37,5 @@ android {
 dependencies {
     implementation(AppDependencies.baseLibs)
     implementation(AppDependencies.androidx.appcompat)
-    implementation(project(mapOf("path" to ":lib_appinject")))
+    compileOnly(project(mapOf("path" to ":lib_appinject")))
 }

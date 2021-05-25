@@ -20,6 +20,7 @@ android {
         jvmTarget = "1.8"
     }
     defaultConfig {
+        applicationId = "com.yh.demo"
         minSdkVersion(AppConfig.minSdk)
         targetSdkVersion(AppConfig.targetSdk)
         versionCode(AppConfig.versionCode)
