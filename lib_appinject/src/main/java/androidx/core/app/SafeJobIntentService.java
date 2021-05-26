@@ -4,14 +4,11 @@ import android.os.Build;
 
 import com.yh.appinject.logger.LibLogs;
 
-import androidx.annotation.RestrictTo;
-
 /**
  * issue: https://github.com/evernote/android-job/issues/255
  * <p>
  * copy from: https://github.com/evernote/android-job
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class SafeJobIntentService extends JobIntentService{
     
     @Override
