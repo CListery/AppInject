@@ -188,6 +188,16 @@ internal class TheLogPrinter : Printer {
         }
         val builder = StringBuilder()
         if (justCurrentRow) {
+            if(cursor.position == -1) {
+                if(cursor.moveToFirst()) {
+                    cursorCurRow(cursor, builder)
+                    d(builder.toString())
+                    cursor.moveToPrevious()
+                } else {
+                    d("Invalid cursor content")
+                }
+                return
+            }
             cursorCurRow(cursor, builder)
             d(builder.toString())
             return
