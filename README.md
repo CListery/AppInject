@@ -2,6 +2,12 @@
 
 开发库的基本框架，让你无需纠结 Context 的获取和基本日志的打印功能
 
+## Use
+
+```gradle
+implementation("io.github.clistery:appinject:1.4.0")
+```
+
 ## For Library
 
 - 获取Context
