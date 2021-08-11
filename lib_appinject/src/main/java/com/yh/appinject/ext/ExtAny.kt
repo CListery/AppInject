@@ -7,13 +7,4 @@ package com.yh.appinject.ext
  *
  * * 请不要通过该值来比较对象是否相同
  */
-val Any?.memoryId
-    get():String {
-        if(null == this){
-            return toString()
-        }
-        return toString().replace(
-            this::class.java.canonicalName ?: "", ""
-        ).replace("@", "")
-            .uppercase()
-    }
+val Any?.memoryId get() = System.identityHashCode(this).toString(16)
