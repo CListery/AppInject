@@ -7,7 +7,7 @@ import android.os.IBinder
 import androidx.core.app.SafeJobIntentService
 import com.yh.appinject.logger.logD
 
-class MyJobServer : SafeJobIntentService() {
+class MySafeJobServer : SafeJobIntentService() {
     
     companion object {
         
@@ -19,7 +19,7 @@ class MyJobServer : SafeJobIntentService() {
         @JvmStatic
         fun enqueueWork(context: Context) {
             logD("enqueueWork: $context")
-            enqueueWork(context, MyJobServer::class.java, JOB_ID, Intent())
+            enqueueWork(context, MySafeJobServer::class.java, JOB_ID, Intent())
         }
     }
     

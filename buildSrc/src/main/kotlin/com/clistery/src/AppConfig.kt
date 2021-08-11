@@ -1,4 +1,4 @@
-package com.clistery.gradle
+package com.clistery.src
 
 object AppConfig {
     const val compileSdk = 30
@@ -6,8 +6,8 @@ object AppConfig {
     const val minSdk = 14
     const val targetSdk = 30
     
-    const val GROUP_ID = "com.clistery.app"
+    const val GROUP_ID = "io.github.clistery"
     const val ARTIFACT_ID = "appinject"
-    const val versionName = "1.3.6.2"
-    const val versionCode = 12
+    const val versionName = "1.4.0"
+    const val versionCode = 14
 }

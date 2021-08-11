@@ -1,6 +1,6 @@
 @file:Suppress("ClassName")
 
-package com.clistery.gradle
+package com.clistery.src
 
 object AppVersion {
     

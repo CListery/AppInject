@@ -6,7 +6,7 @@ gradlePlugin {
     plugins {
         create("clistery_plugin") {
             id = "com.clistery.gradle"
-            implementationClass = "com.clistery.gradle.CPlugin"
+            implementationClass = "com.clistery.src.CPlugin"
         }
     }
 }

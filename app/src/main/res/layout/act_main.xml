@@ -5,51 +5,44 @@
     android:orientation="vertical">
     
     <Button
+        android:id="@+id/btnStartSafeServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:clickable="true"
-        android:onClick="startServer"
-        android:text="Start Server" />
+        android:text="Start Safe Server" />
 
     <Button
+        android:id="@+id/btnStartCrashServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:clickable="true"
-        android:onClick="startCrashServer"
         android:text="Start CrashServer" />
 
     <Button
+        android:id="@+id/btnStartTimerIntentServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="260dp"
-        android:clickable="true"
-        android:onClick="startTimerIntentServer"
         android:text="Start TimerIntentServer" />
 
     <Button
+        android:id="@+id/btnStartTimerJobServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="320dp"
-        android:clickable="true"
-        android:onClick="startTimerJobServer"
         android:text="Start TimerJobServer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_end_call"
+        android:id="@+id/btnOpenNext"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="goNext"
         android:src="@android:drawable/ic_lock_idle_lock" />
 
 </RelativeLayout>

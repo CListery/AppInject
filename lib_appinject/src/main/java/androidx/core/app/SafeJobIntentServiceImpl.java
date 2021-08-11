@@ -47,7 +47,7 @@ class SafeJobIntentServiceImpl extends JobServiceEngine implements JobIntentServ
                     }catch(SecurityException | IllegalArgumentException exception){
                         // ignore lang.IllegalArgumentException: Given work is not active: JobWorkItem
                         // ignore SecurityException: Caller no longer running
-                        exception.printStackTrace();
+                        LibLogs.logE("block crash", null, null, exception);
                     }
                 }
             }
@@ -99,7 +99,7 @@ class SafeJobIntentServiceImpl extends JobServiceEngine implements JobIntentServ
                 work = mParams.dequeueWork();
             }catch(SecurityException se){
                 //ignore
-                se.printStackTrace();
+                LibLogs.logE("block crash", null, null, se);
             }
         }
         if(work != null){

@@ -1,6 +1,6 @@
-import com.clistery.gradle.AppConfig
-import com.clistery.gradle.AppDependencies
-import com.clistery.gradle.implementation
+import com.clistery.src.AppConfig
+import com.clistery.src.AppDependencies
+import com.clistery.src.implementation
 
 plugins {
     id("com.android.library")
@@ -8,7 +8,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("org.jetbrains.dokka")
-    `maven-publish`
+    id("kre-publish")
 }
 
 android {
@@ -43,7 +43,9 @@ android {
 
 dependencies {
     implementation(AppDependencies.baseLibs)
+    compileOnly(AppDependencies.androidx.viewbinding)
 }
+
 val androidJavadocs by tasks.register<Javadoc>("androidJavadocs") {
     options {
         encoding = Charsets.UTF_8.displayName()
@@ -52,7 +54,7 @@ val androidJavadocs by tasks.register<Javadoc>("androidJavadocs") {
             classpath.plus(project.files(android.bootClasspath.joinToString(File.pathSeparator)))
         exclude(listOf("**/*.kt", "**/BuildConfig.java", "**/R.java"))
         isFailOnError = true
-        if(this is StandardJavadocDocletOptions) {
+        if (this is StandardJavadocDocletOptions) {
             links("http://docs.oracle.com/javase/8/docs/api/")
             linksOffline("http://d.android.com/reference", "${android.sdkDirectory}/docs/reference")
         }
@@ -88,47 +90,16 @@ val androidSourcesJar by tasks.register<Jar>("androidSourcesJar") {
     archiveClassifier.set("sources")
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "_ProjectMaven_"
-            url = uri(extra.get("PROJECT_LOCAL_MAVEN_PATH")?.toString()!!)
-        }
-        maven {
-            name = "_jfrog.fx_"
-            url = uri(extra.get("MAVEN_REPOSITORY_URL")?.toString()!!)
-            credentials {
-                username = extra.get("artifactory_maven_user")?.toString()!!
-                password = extra.get("artifactory_maven_pwd")?.toString()!!
-            }
-        }
-    }
+publishing{
     publications {
-        create<MavenPublication>("-Release") {
+        maybeCreate<MavenPublication>("-Release").apply {
             groupId = AppConfig.GROUP_ID
             artifactId = AppConfig.ARTIFACT_ID
             version = AppConfig.versionName
             
             suppressAllPomMetadataWarnings()
-            pom {
-                name.set(rootProject.name)
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("cyh")
-                        name.set("CListery")
-                        email.set("cai1083088795@gmail.com")
-                    }
-                }
-            }
-            
+    
             artifact(dokkaJavadocJar)
-            artifact(dokkaHtmlJar)
             artifact(androidSourcesJar)
             afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
         }

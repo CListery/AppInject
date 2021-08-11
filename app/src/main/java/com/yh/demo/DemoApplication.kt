@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.yh.appinject.IBaseAppInject
 import com.yh.appinject.ext.isMainProcess
 import com.yh.appinject.logger.LogsManager
+import com.yh.appinject.logger.logE
 import com.yh.libapp.Lib1
 
 /**
@@ -27,8 +28,8 @@ class DemoApplication : Application(),
     
     override fun getNotificationIcon(): Int = R.mipmap.ic_launcher
     
-    private fun libDefLoggerConfig(): Pair<Boolean, Int> = Pair(false, Log.VERBOSE)
-    private fun appDefLoggerConfig(): Pair<Boolean, Int> = Pair(false, Log.VERBOSE)
+    private fun libDefLoggerConfig(): Pair<Boolean, Int> = Pair(false, Log.ERROR)
+    private fun appDefLoggerConfig(): Pair<Boolean, Int> = Pair(false, Log.ERROR)
     
     override fun onCreate() {
         super.onCreate()
@@ -36,6 +37,8 @@ class DemoApplication : Application(),
         if(!isMainProcess()) {
             return
         }
+        
+        logE("onCreate")
         
         sApp = this
         mCtx = getApplication()

@@ -1,6 +1,6 @@
-import com.clistery.gradle.AppConfig
-import com.clistery.gradle.AppDependencies
-import com.clistery.gradle.implementation
+import com.clistery.src.AppConfig
+import com.clistery.src.AppDependencies
+import com.clistery.src.implementation
 
 plugins {
     id("com.android.library")
@@ -9,8 +9,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion(com.clistery.gradle.AppConfig.compileSdk)
-    buildToolsVersion(com.clistery.gradle.AppConfig.buildToolsVersion)
+    compileSdkVersion(AppConfig.compileSdk)
+    buildToolsVersion(AppConfig.buildToolsVersion)
     
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -20,10 +20,10 @@ android {
         jvmTarget = "1.8"
     }
     defaultConfig {
-        minSdkVersion(com.clistery.gradle.AppConfig.minSdk)
-        targetSdkVersion(com.clistery.gradle.AppConfig.targetSdk)
-        versionCode(com.clistery.gradle.AppConfig.versionCode)
-        versionName(com.clistery.gradle.AppConfig.versionName)
+        minSdkVersion(AppConfig.minSdk)
+        targetSdkVersion(AppConfig.targetSdk)
+        versionCode(AppConfig.versionCode)
+        versionName(AppConfig.versionName)
     }
 
     buildTypes {

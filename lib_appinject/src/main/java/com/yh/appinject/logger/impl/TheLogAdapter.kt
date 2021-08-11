@@ -20,12 +20,12 @@ class TheLogAdapter(private val formatStrategy: FormatStrategy) : LogAdapter {
     /**
      * 是否启用
      */
-    fun isEnable() = loggerConfig.first
+    val isEnable get() = loggerConfig.first
 
     /**
      * 日志等级
      */
-    fun logLevel() = loggerConfig.second
+    val logLevel get() = loggerConfig.second
 
     /**
      * 设置日志等级及开关
@@ -36,7 +36,7 @@ class TheLogAdapter(private val formatStrategy: FormatStrategy) : LogAdapter {
     }
 
     override fun isLoggable(priority: Int, tag: String?): Boolean {
-        return loggerConfig.first && priority >= loggerConfig.second
+        return priority >= Log.ERROR || (isEnable && priority >= logLevel)
     }
 
     override fun log(priority: Int, @Nullable tag: String?, @NonNull message: String) {

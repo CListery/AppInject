@@ -1,6 +1,6 @@
-import com.clistery.gradle.AppConfig
-import com.clistery.gradle.AppDependencies
-import com.clistery.gradle.implementation
+import com.clistery.src.AppConfig
+import com.clistery.src.AppDependencies
+import com.clistery.src.implementation
 
 plugins {
     id("com.android.application")
@@ -19,6 +19,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.yh.demo"
         minSdkVersion(AppConfig.minSdk)
@@ -36,6 +39,8 @@ android {
 dependencies {
     implementation(AppDependencies.baseLibs)
     implementation(AppDependencies.androidx.appcompat)
+    implementation(AppDependencies.androidx.livedata)
+    implementation(AppDependencies.androidx.viewmodel)
     implementation(AppDependencies.google.material)
     implementation(project(mapOf("path" to ":libapp")))
     implementation(project(mapOf("path" to ":lib_appinject")))

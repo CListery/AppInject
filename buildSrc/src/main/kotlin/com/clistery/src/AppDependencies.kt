@@ -1,4 +1,4 @@
-package com.clistery.gradle
+package com.clistery.src
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
@@ -24,6 +24,9 @@ object AppDependencies {
         
         const val coreKtx = "androidx.core:core-ktx:${AppVersion.androidx.coreKtx}"
         const val appcompat = "androidx.appcompat:appcompat:${AppVersion.androidx.appcompat}"
+        const val viewbinding = "androidx.databinding:viewbinding:4.2.1"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     }
     
     object google {
@@ -34,7 +37,8 @@ object AppDependencies {
     val baseLibs: ArrayList<String>
         get() = arrayListOf(
             kotlin.stdlib,
-            androidx.coreKtx
+            androidx.coreKtx,
+            androidx.appcompat,
         )
     
 }

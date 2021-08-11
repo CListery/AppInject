@@ -1,4 +1,4 @@
-package com.clistery.gradle
+package com.clistery.src
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

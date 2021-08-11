@@ -1,11 +1,10 @@
 package com.yh.demo
 
-import android.app.Activity
 import android.content.Intent
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import com.yh.appinject.base.ViewBindingActivity
 import com.yh.appinject.logger.LibLogs
 import com.yh.appinject.logger.LogsManager
 import com.yh.appinject.logger.impl.TheLogAdapter
@@ -14,8 +13,9 @@ import com.yh.appinject.logger.logD
 import com.yh.appinject.logger.logE
 import com.yh.appinject.logger.logJSON
 import com.yh.appinject.logger.logW
+import com.yh.demo.databinding.ActMainBinding
 import com.yh.demo.server.CrashJobServer
-import com.yh.demo.server.MyJobServer
+import com.yh.demo.server.MySafeJobServer
 import com.yh.demo.server.TimerIntentServer
 import com.yh.demo.server.TimerJobServer
 import com.yh.libapp.A
@@ -23,18 +23,16 @@ import com.yh.libapp.A
 /**
  * Created by CYH on 2020-03-13 14:24
  */
-class MainAct : Activity() {
+class MainAct : ViewBindingActivity<ActMainBinding>() {
     
     private val mLoggerAdapter =
         TheLogAdapter(TheLogFormatStrategy.newBuilder().setFirstTag("MainAct").build()).setConfig(
             true to Log.VERBOSE
         )
     
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        
-        setContentView(R.layout.act_main)
-        
+    override fun binderCreator(savedInstanceState: Bundle?) = ActMainBinding.inflate(layoutInflater)
+    
+    override fun preInit(savedInstanceState: Bundle?) {
         Log.d("Tag", "I'm a log which you don't see easily, hehe")
         Log.d("json content", "{ \"key\": 3, \n \"value\": something}")
         Log.e("error", "There is a crash somewhere or any warning")
@@ -68,9 +66,27 @@ class MainAct : Activity() {
         A()
     }
     
-    fun goNext(view: View) {
-        logD("goNext")
-        startActivity(Intent(this, SecAct::class.java))
+    override fun ActMainBinding.onInit(savedInstanceState: Bundle?) {
+        btnOpenNext.setOnClickListener {
+            logD("goNext")
+            startActivity(Intent(mCtx, SecAct::class.java))
+        }
+        btnStartSafeServer.setOnClickListener {
+            logD("startServer")
+            MySafeJobServer.enqueueWork(mCtx)
+        }
+        btnStartCrashServer.setOnClickListener {
+            logD("startCrashServer")
+            CrashJobServer.enqueueWork(mCtx)
+        }
+        btnStartTimerIntentServer.setOnClickListener {
+            logD("startTimerIntentServer")
+            startService(Intent(mCtx, TimerIntentServer::class.java))
+        }
+        btnStartTimerJobServer.setOnClickListener {
+            logD("startTimerJobServer")
+            TimerJobServer.enqueueWork(mCtx)
+        }
     }
     
     override fun onResume() {
@@ -78,23 +94,4 @@ class MainAct : Activity() {
         super.onResume()
     }
     
-    fun startServer(view: View) {
-        logD("startServer")
-        MyJobServer.enqueueWork(this)
-    }
-    
-    fun startCrashServer(view: View) {
-        logD("startCrashServer")
-        CrashJobServer.enqueueWork(this)
-    }
-    
-    fun startTimerIntentServer(view: View) {
-        logD("startTimerIntentServer")
-        startService(Intent(this, TimerIntentServer::class.java))
-    }
-    
-    fun startTimerJobServer(view: View) {
-        logD("startTimerJobServer")
-        TimerJobServer.enqueueWork(this)
-    }
 }

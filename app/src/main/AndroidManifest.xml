@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".SecAct" />
         <service
-            android:name=".server.MyJobServer"
+            android:name=".server.MySafeJobServer"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service

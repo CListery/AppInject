@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
+import com.yh.appinject.ext.isCurrentLooper
 import com.yh.appinject.ext.isMainProcess
 import com.yh.appinject.lifecycle.ActLifeCallback
 import com.yh.appinject.lifecycle.IAppForegroundEvent
@@ -34,7 +35,7 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
      */
     private lateinit var mInject: Inject
     /**
-     * APP PID
+     * Lib 初始化时的 PID
      */
     @Volatile
     protected var mProcessID: Int = -1
@@ -59,8 +60,8 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
      */
     open fun register(inject: Inject) {
         mInject = inject
+        mProcessID = Process.myPid()
         if (inject.getApplication().isMainProcess()) {
-            mProcessID = Process.myPid()
             ActLifeCallback.get().register(inject.getApplication())
         }
         init()
@@ -147,7 +148,7 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
      * @param [msg] 提示信息
      */
     fun showTipMsg(msg: String) {
-        if (Thread.currentThread() == Looper.getMainLooper().thread) {
+        if (Looper.getMainLooper().isCurrentLooper) {
             internalShow(msg)
         } else {
             Handler(ctx().mainLooper).post { internalShow(msg) }
