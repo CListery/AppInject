@@ -5,9 +5,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Process
 import com.yh.appinject.ext.isCurrentLooper
-import com.yh.appinject.ext.isMainProcess
-import com.yh.appinject.lifecycle.ActLifeCallback
-import com.yh.appinject.lifecycle.IAppForegroundEvent
 import com.yh.appinject.logger.LogAdapter
 import com.yh.appinject.logger.LogsManager
 import com.yh.appinject.logger.impl.TheLogAdapter
@@ -61,9 +58,6 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
     open fun register(inject: Inject) {
         mInject = inject
         mProcessID = Process.myPid()
-        if (inject.getApplication().isMainProcess()) {
-            ActLifeCallback.get().register(inject.getApplication())
-        }
         init()
     }
 
@@ -114,33 +108,6 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
      */
     open fun makeFormatStrategy(): TheLogFormatStrategy.Builder =
         TheLogFormatStrategy.newBuilder().setFirstTag(logTag())
-
-    /**
-     * 注册APP进入前/后台状态监听器
-     *
-     * @param [iAppForegroundEvent] 前/后台状态监听器
-     */
-    fun registerActivityLifecycleCallbacks(iAppForegroundEvent: IAppForegroundEvent) {
-        ActLifeCallback.get().pushListener(iAppForegroundEvent)
-    }
-
-    /**
-     * 注销APP进入前/后台状态监听器
-     *
-     * @param [iAppForegroundEvent] 前/后台状态监听器
-     */
-    fun unRegisterActivityLifecycleCallbacks(iAppForegroundEvent: IAppForegroundEvent) {
-        ActLifeCallback.get().popListener(iAppForegroundEvent)
-    }
-
-    /**
-     * APP是否处于前台
-     *
-     * @return
-     *  - true 前台
-     *  - false 后台
-     */
-    fun isForeground() = ActLifeCallback.get().isForeground()
 
     /**
      * 显示提示信息
