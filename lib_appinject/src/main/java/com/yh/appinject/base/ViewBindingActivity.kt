@@ -17,7 +17,6 @@ abstract class ViewBindingActivity<VB : ViewBinding> : AppCompatActivity() {
     protected val uiLooper by lazy { Looper.getMainLooper() }
     protected val uiHandler by lazy { Handler(uiLooper, null) }
     
-    @Suppress("UNCHECKED_CAST")
     protected val mAct: ViewBindingActivity<VB> by lazy { this }
     protected val mCtx: Context by lazy { this.baseContext }
     protected val mActID by lazy { mAct.memoryId }
