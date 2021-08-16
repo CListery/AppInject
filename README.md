@@ -5,7 +5,7 @@
 ## Use
 
 ```gradle
-implementation("io.github.clistery:appinject:1.4.0")
+implementation("io.github.clistery:appinject:1.4.3")
 ```
 
 ## For Library
