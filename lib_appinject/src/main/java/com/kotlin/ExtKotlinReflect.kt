@@ -5,7 +5,6 @@ package com.kotlin
 import java.lang.reflect.AccessibleObject
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
-import java.lang.reflect.Modifier
 
 /**
  * 反射类对象通过指定构造函数创建类实例
@@ -62,17 +61,6 @@ fun <R : Any> Class<*>.safeFieldGet(
 }
 
 /**
- * 反射类对象修改指定属性
- *
- * @param [fieldName] 属性名
- * @param [obj] 从该实例中获取指定属性的值
- * @param [value] 要设置的值
- */
-fun <R : Any> Class<*>.safeFieldSet(fieldName: String, obj: Any? = null, value: Any?): Boolean {
-    return getDeclaredField(fieldName).safeSet(obj, value)
-}
-
-/**
  * 反射属性对象获取值
  *
  * @param [clazzR] 值类型
@@ -105,21 +93,28 @@ inline fun <reified R : Any> Field.safeGet(obj: Any?): R? {
 }
 
 /**
+ * 反射类对象修改指定属性
+ *
+ * @param [fieldName] 属性名
+ * @param [obj] 从该实例中获取指定属性的值
+ * @param [value] 要设置的值
+ */
+fun Class<*>.safeFieldSet(fieldName: String, obj: Any? = null, value: Any?): Boolean {
+    return getDeclaredField(fieldName).safeSet(obj, value)
+}
+
+/**
  * 反射属性对象修改值
  *
  * @param [obj] 从该实例中获取指定属性的值
  * @param [value] 要设置的值
  */
 fun Field.safeSet(obj: Any? = null, value: Any?): Boolean {
-    if(Modifier.isFinal(modifiers)) {
-        return false
+    return this.safeAccess {
+        it.set(obj, value)
+        return@safeAccess true
     }
-    try {
-        this.set(obj, value)
-    } catch(e: Exception) {
-        return false
-    }
-    return true
+        ?: false
 }
 
 /**
@@ -128,9 +123,14 @@ fun Field.safeSet(obj: Any? = null, value: Any?): Boolean {
  * @param [block] 访问回调
  */
 fun <T : AccessibleObject, R : Any> T.safeAccess(block: (T) -> R?): R? {
-    val originAccessible = isAccessible
-    isAccessible = true
-    val result = block.invoke(this)
-    isAccessible = originAccessible
+    var result: R? = null
+    try {
+        val originAccessible = isAccessible
+        isAccessible = true
+        result = block.invoke(this)
+        isAccessible = originAccessible
+    } catch(e: Exception) {
+        e.printStackTrace()
+    }
     return result
 }
