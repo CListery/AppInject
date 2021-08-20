@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yh.demo">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    
     <application
         android:name=".DemoApplication"
         android:allowBackup="false"
@@ -11,13 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainAct">
+        <activity
+            android:name=".MainAct"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecAct" />
+        <activity
+            android:name=".SecAct"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <service
             android:name=".server.MySafeJobServer"
             android:exported="true"
