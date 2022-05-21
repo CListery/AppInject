@@ -27,8 +27,6 @@ android {
         targetSdkVersion(AppConfig.targetSdk)
         versionCode(AppConfig.versionCode)
         versionName(AppConfig.versionName)
-        
-        buildConfigField("int", "LOG_METHOD_COUNT", "2")
     }
     lintOptions {
         isAbortOnError = false
@@ -43,6 +41,7 @@ android {
 
 dependencies {
     implementation(AppDependencies.baseLibs)
+    implementation(AppDependencies.clistery.appbasic)
     compileOnly(AppDependencies.androidx.viewbinding)
 }
 

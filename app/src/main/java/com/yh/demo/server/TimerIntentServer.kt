@@ -2,7 +2,7 @@ package com.yh.demo.server
 
 import android.app.IntentService
 import android.content.Intent
-import com.yh.appinject.logger.logD
+import com.yh.appbasic.logger.logD
 
 class TimerIntentServer : IntentService("TimerIntentServer") {
     

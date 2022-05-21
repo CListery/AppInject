@@ -4,6 +4,10 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object AppDependencies {
     
+    object clistery{
+        const val appbasic = "io.github.clistery:appbasic:1.0.1"
+    }
+    
     object kotlin {
         
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${AppVersion.kotlin.version}"

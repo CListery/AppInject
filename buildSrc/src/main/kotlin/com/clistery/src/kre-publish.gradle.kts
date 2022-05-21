@@ -27,8 +27,8 @@ publishing {
             val publicName = "${rootProject.name} ${name.capitalize()}"
             pom {
                 name.set(publicName)
-                description.set("Continuation version for https://github.com/vicpinm/Kotlin-Realm-Extensions")
-                url.set("https://github.com/CListery/Kotlin-Realm-Extensions")
+                description.set("开发库的基本框架，让你无需纠结 Context 的获取和基本日志的打印功能")
+                url.set("https://github.com/CListery/AppInject")
                 licenses {
                     license {
                         name.set("The Apache License, Version 2.0")
@@ -44,9 +44,9 @@ publishing {
                     }
                 }
                 scm {
-                    url.set("https://github.com/chrisbanes/ActionBar-PullToRefresh")
-                    connection.set("scm:git@github.com:CListery/Kotlin-Realm-Extensions.git")
-                    developerConnection.set("scm:git@github.com:CListery/Kotlin-Realm-Extensions.git")
+                    url.set("https://github.com/CListery/AppInject")
+                    connection.set("scm:git@github.com:CListery/AppInject.git")
+                    developerConnection.set("scm:git@github.com:CListery/AppInject.git")
                 }
             }
         }

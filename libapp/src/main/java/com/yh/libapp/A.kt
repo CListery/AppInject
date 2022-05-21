@@ -1,6 +1,6 @@
 package com.yh.libapp
 
-import com.yh.appinject.logger.ext.libW
+import com.yh.appbasic.logger.ext.libW
 
 /**
  * Created by CYH on 2020/5/16 22:33

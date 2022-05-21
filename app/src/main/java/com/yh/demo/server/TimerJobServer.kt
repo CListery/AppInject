@@ -3,7 +3,7 @@ package com.yh.demo.server
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.SafeJobIntentService
-import com.yh.appinject.logger.logD
+import com.yh.appbasic.logger.logD
 
 class TimerJobServer : SafeJobIntentService() {
     

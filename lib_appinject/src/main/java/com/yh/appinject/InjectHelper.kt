@@ -4,11 +4,9 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
-import com.yh.appinject.ext.isCurrentLooper
-import com.yh.appinject.logger.LogAdapter
-import com.yh.appinject.logger.LogsManager
-import com.yh.appinject.logger.impl.TheLogAdapter
-import com.yh.appinject.logger.impl.TheLogFormatStrategy
+import com.yh.appbasic.ext.isCurrentLooper
+import com.yh.appbasic.logger.ILogOwner
+import com.yh.appbasic.logger.LogsManager
 
 /**
  * 库注入协助器
@@ -25,7 +23,7 @@ import com.yh.appinject.logger.impl.TheLogFormatStrategy
  *
  * Created by CYH on 2019-08-02 08:53
  */
-abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
+abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() : ILogOwner {
 
     /**
      * [Inject]
@@ -73,7 +71,7 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
      *  - first - 是否开启日志
      *  - second - 日志等级 [android.util.Log]
      */
-    fun loggerConfig(config: Pair<Boolean, Int>) {
+    override fun loggerConfig(config: Pair<Boolean, Int>) {
         if (config.first) {
             LogsManager.get().install(this, makeLogAdapter(config))
         } else {
@@ -81,33 +79,12 @@ abstract class InjectHelper<Inject : IBaseAppInject> protected constructor() {
         }
     }
 
-    /**
-     * 日志TAG
-     *
-     * @return 默认为该类的类名
-     */
-    open fun logTag(): String = this::class.java.simpleName
-
-    /**
-     * 创建 [LogAdapter]
-     *
-     * @param [config]
-     *  - first - 是否开启日志
-     *  - second - 日志等级 [android.util.Log]
-     * @return 默认 [TheLogAdapter]
-     * @see TheLogAdapter
-     */
-    open fun makeLogAdapter(config: Pair<Boolean, Int>): LogAdapter =
-        TheLogAdapter(makeFormatStrategy().build()).setConfig(config)
-
-    /**
-     * 创建 [TheLogFormatStrategy.Builder]
-     *
-     * @return [TheLogFormatStrategy.Builder]
-     * @see TheLogFormatStrategy.Builder
-     */
-    open fun makeFormatStrategy(): TheLogFormatStrategy.Builder =
-        TheLogFormatStrategy.newBuilder().setFirstTag(logTag())
+    // /**
+    //  * 日志TAG
+    //  *
+    //  * @return 默认为该类的类名
+    //  */
+    // open fun logTag(): String = this::class.java.simpleName
 
     /**
      * 显示提示信息

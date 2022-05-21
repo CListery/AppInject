@@ -3,10 +3,10 @@ package com.yh.demo
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import com.yh.appbasic.ext.isMainProcess
 import com.yh.appinject.IBaseAppInject
-import com.yh.appinject.ext.isMainProcess
-import com.yh.appinject.logger.LogsManager
-import com.yh.appinject.logger.logE
+import com.yh.appbasic.logger.LogsManager
+import com.yh.appbasic.logger.logE
 import com.yh.libapp.Lib1
 
 /**

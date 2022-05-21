@@ -1,7 +1,6 @@
 package com.yh.demo
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -9,8 +8,8 @@ import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
-import com.yh.appinject.base.ViewBindingActivity
-import com.yh.appinject.logger.LogsManager
+import com.yh.appbasic.ViewBindingActivity
+import com.yh.appbasic.logger.LogsManager
 import com.yh.demo.databinding.ActSecBinding
 
 /**

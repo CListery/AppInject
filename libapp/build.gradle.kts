@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(AppDependencies.baseLibs)
+    implementation(AppDependencies.clistery.appbasic)
     implementation(AppDependencies.androidx.appcompat)
     compileOnly(project(mapOf("path" to ":lib_appinject")))
 }

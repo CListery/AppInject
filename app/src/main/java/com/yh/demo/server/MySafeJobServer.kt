@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
 import androidx.core.app.SafeJobIntentService
-import com.yh.appinject.logger.logD
+import com.yh.appbasic.logger.logD
 
 class MySafeJobServer : SafeJobIntentService() {
     
