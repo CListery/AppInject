@@ -1,6 +1,8 @@
 package com.yh.demo
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -8,8 +10,10 @@ import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
-import com.yh.appbasic.ViewBindingActivity
 import com.yh.appbasic.logger.LogsManager
+import com.yh.appbasic.logger.owner.AppLogger
+import com.yh.appbasic.logger.owner.LibLogger
+import com.yh.appbasic.ui.ViewBindingActivity
 import com.yh.demo.databinding.ActSecBinding
 
 /**
@@ -20,6 +24,8 @@ class SecAct : ViewBindingActivity<ActSecBinding>() {
     override fun binderCreator(savedInstanceState: Bundle?) = ActSecBinding.inflate(layoutInflater)
     
     override fun ActSecBinding.onInit(savedInstanceState: Bundle?) {
+        AppLogger.off()
+        LibLogger.on()
         fab.setOnClickListener {
             showAlert()
         }
@@ -44,6 +50,9 @@ class SecAct : ViewBindingActivity<ActSecBinding>() {
                         window?.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
                     }
                     show()
+                    val launcherIntent = Intent(Intent.ACTION_MAIN)
+                    launcherIntent.addCategory(Intent.CATEGORY_HOME)
+                    startActivity(launcherIntent)
                 }
             } else {
                 val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
@@ -52,14 +61,5 @@ class SecAct : ViewBindingActivity<ActSecBinding>() {
                 startActivity(intent)
             }
         }
-    }
-    
-    override fun onDestroy() {
-        LogsManager.get().setDefLoggerConfig(
-            libConfig = Pair(true, Log.VERBOSE),
-            appConfig = Pair(false, Log.VERBOSE)
-        )
-        
-        super.onDestroy()
     }
 }

@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yh.libapp" />
+    package="com.yh.libapp" >
+    
+    <application>
+        <provider
+            android:name=".Lib1"
+            android:authorities="${applicationId}.Lib1.Init"
+            android:enabled="true"
+            android:exported="false"/>
+    </application>
+    
+</manifest>

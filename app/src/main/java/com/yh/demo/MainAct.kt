@@ -4,15 +4,14 @@ import android.content.Intent
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.util.Log
-import com.yh.appbasic.ViewBindingActivity
-import com.yh.appbasic.logger.LibLogs
-import com.yh.appbasic.logger.LogsManager
-import com.yh.appbasic.logger.impl.TheLogAdapter
-import com.yh.appbasic.logger.impl.TheLogFormatStrategy
+import com.yh.appbasic.logger.ILoggable
+import com.yh.appbasic.logger.logCursor
 import com.yh.appbasic.logger.logD
 import com.yh.appbasic.logger.logE
 import com.yh.appbasic.logger.logJSON
 import com.yh.appbasic.logger.logW
+import com.yh.appbasic.logger.owner.AppLogger
+import com.yh.appbasic.ui.ViewBindingActivity
 import com.yh.demo.databinding.ActMainBinding
 import com.yh.demo.server.CrashJobServer
 import com.yh.demo.server.MySafeJobServer
@@ -23,12 +22,7 @@ import com.yh.libapp.A
 /**
  * Created by CYH on 2020-03-13 14:24
  */
-class MainAct : ViewBindingActivity<ActMainBinding>() {
-    
-    private val mLoggerAdapter =
-        TheLogAdapter(TheLogFormatStrategy.newBuilder().setFirstTag("MainAct").build()).setConfig(
-            true to Log.VERBOSE
-        )
+class MainAct : ViewBindingActivity<ActMainBinding>(), ILoggable {
     
     override fun binderCreator(savedInstanceState: Bundle?) = ActMainBinding.inflate(layoutInflater)
     
@@ -36,8 +30,8 @@ class MainAct : ViewBindingActivity<ActMainBinding>() {
         Log.d("Tag", "I'm a log which you don't see easily, hehe")
         Log.d("json content", "{ \"key\": 3, \n \"value\": something}")
         Log.e("error", "There is a crash somewhere or any warning")
-        LogsManager.get().setDefLoggerConfig(appConfig = Pair(true, Log.VERBOSE))
-        logE("Custom tag for only one use", "tag")
+        AppLogger.on()
+        logE("Custom tag for only one use", tag = "tag")
         logJSON("{ \"key\": 3, \"value\": something}")
         logD("this is a arr: ${listOf("foo", "bar")}")
         val map = HashMap<String, String>()
@@ -54,16 +48,14 @@ class MainAct : ViewBindingActivity<ActMainBinding>() {
         cursor.newRow().add("id", 2).add("name", "cyh").add("age", 15).add("len", 138.75)
         cursor.newRow().add("id", 3).add("name", "cyh").add("age", 20).add("len", 175.643)
         cursor.newRow().add("id", 4).add("name", "cyh").add("age", 25).add("len", 178.456)
-        LibLogs.logCursor(cursor, logAdapter = mLoggerAdapter)
+        logCursor(cursor, loggable = this)
         cursor.moveToPosition(2)
-        LibLogs.logCursor(cursor, true, logAdapter = mLoggerAdapter)
+        logCursor(cursor, true, loggable = this)
         
         window.decorView.setOnTouchListener { v, event ->
-            LibLogs.logW("$v touch $event", logAdapter = mLoggerAdapter)
+            logW("$v touch $event", loggable = this)
             false
         }
-        
-        A()
     }
     
     override fun ActMainBinding.onInit(savedInstanceState: Bundle?) {
@@ -92,6 +84,7 @@ class MainAct : ViewBindingActivity<ActMainBinding>() {
     override fun onResume() {
         logD("onResume")
         super.onResume()
+        A()
     }
     
 }

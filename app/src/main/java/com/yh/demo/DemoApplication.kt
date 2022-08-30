@@ -1,35 +1,31 @@
 package com.yh.demo
 
 import android.app.Application
-import android.util.Log
+import android.content.isMainProcess
 import android.widget.Toast
-import com.yh.appbasic.ext.isMainProcess
-import com.yh.appinject.IBaseAppInject
-import com.yh.appbasic.logger.LogsManager
+import com.yh.appbasic.init.AppBasicShare
 import com.yh.appbasic.logger.logE
+import com.yh.appbasic.logger.owner.AppLogger
+import com.yh.appbasic.logger.owner.LibLogger
+import com.yh.appinject.IBaseAppInject
 import com.yh.libapp.Lib1
+import com.yh.libapp.Lib1Inject
 
 /**
  * Created by CYH on 2020-03-13 14:10
  */
-class DemoApplication : Application(),
-                        IBaseAppInject {
+class DemoApplication : Application(), IBaseAppInject, Lib1Inject {
     
     private var sApp: DemoApplication? = null
     private var mCtx: Application? = null
     
-    override fun getApplication(): Application {
-        return sApp!!
-    }
+    override val lib1Number: Number get() = Math.random()
     
     override fun showTipMsg(msg: String) {
         Toast.makeText(mCtx, msg, Toast.LENGTH_SHORT).show()
     }
     
     override fun getNotificationIcon(): Int = R.mipmap.ic_launcher
-    
-    private fun libDefLoggerConfig(): Pair<Boolean, Int> = Pair(false, Log.ERROR)
-    private fun appDefLoggerConfig(): Pair<Boolean, Int> = Pair(false, Log.ERROR)
     
     override fun onCreate() {
         super.onCreate()
@@ -41,12 +37,14 @@ class DemoApplication : Application(),
         logE("onCreate")
         
         sApp = this
-        mCtx = getApplication()
+        mCtx = this
         
-        LogsManager.get().setDefLoggerConfig(libDefLoggerConfig(), appDefLoggerConfig())
-        Lib1.get().apply {
-            loggerConfig(true to Log.VERBOSE)
-            register(this@DemoApplication)
+        AppLogger.off()
+        LibLogger.off()
+        
+        AppBasicShare.get<Lib1>()?.apply {
+            this.logger.on()
+            this.register(this@DemoApplication)
         }
     }
 }

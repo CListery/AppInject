@@ -1,1 +1,13 @@
-<manifest package="com.yh.appinject" />
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yh.appinject">
+
+    <application>
+        <provider
+            android:name=".InjectHelper"
+            android:authorities="${applicationId}.Inject.Init"
+            android:enabled="false"
+            android:exported="false"/>
+    </application>
+
+</manifest>

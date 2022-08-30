@@ -23,7 +23,7 @@ android {
         viewBinding = true
     }
     defaultConfig {
-        applicationId = "com.yh.demo"
+        applicationId = "${AppConfig.GROUP_ID}.${AppConfig.ARTIFACT_ID}.demo"
         minSdkVersion(AppConfig.minSdk)
         targetSdkVersion(AppConfig.targetSdk)
         versionCode(AppConfig.versionCode)
