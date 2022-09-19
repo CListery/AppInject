@@ -1,6 +1,6 @@
 package com.yh.libapp
 
-import com.yh.appbasic.initializer.AppBasicShare
+import com.yh.appbasic.share.AppBasicShare
 import com.yh.appbasic.logger.logW
 import com.yh.appbasic.logger.owner.LibLogger
 

@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.yh.appbasic.logger.logE
 import com.yh.appbasic.logger.owner.AppLogger
 import com.yh.appbasic.logger.owner.LibLogger
+import com.yh.appbasic.share.AppBasicShare
 import com.yh.appinject.IBaseAppInject
 import com.yh.libapp.Lib1
 import com.yh.libapp.Lib1Inject
@@ -31,6 +32,8 @@ class DemoApplication : Application() {
     
     override fun onCreate() {
         super.onCreate()
+    
+        AppBasicShare.install(this)
         
         if(!isMainProcess()) {
             return

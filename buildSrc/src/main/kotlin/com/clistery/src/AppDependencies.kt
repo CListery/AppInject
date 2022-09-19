@@ -3,7 +3,7 @@ package com.clistery.src
 object AppDependencies {
     
     object clistery{
-        const val appbasic = "io.github.clistery:appbasic:2.2.0"
+        const val appbasic = "io.github.clistery:appbasic:2.3.0"
     }
     
     object kotlin {

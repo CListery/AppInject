@@ -2,7 +2,7 @@ package com.yh.appinject
 
 import android.os.Looper
 import android.os.isCurrentLooper
-import com.yh.appbasic.initializer.AppBasicShare
+import com.yh.appbasic.share.AppBasicShare
 
 /**
  * 库注入协助器
