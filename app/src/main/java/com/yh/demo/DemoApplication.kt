@@ -3,7 +3,6 @@ package com.yh.demo
 import android.app.Application
 import android.content.isMainProcess
 import android.widget.Toast
-import com.yh.appbasic.init.AppBasicShare
 import com.yh.appbasic.logger.logE
 import com.yh.appbasic.logger.owner.AppLogger
 import com.yh.appbasic.logger.owner.LibLogger
@@ -42,9 +41,8 @@ class DemoApplication : Application(), IBaseAppInject, Lib1Inject {
         AppLogger.off()
         LibLogger.off()
         
-        AppBasicShare.get<Lib1>()?.apply {
-            this.logger.on()
-            this.register(this@DemoApplication)
+        Lib1.apply {
+            register(this@DemoApplication)
         }
     }
 }

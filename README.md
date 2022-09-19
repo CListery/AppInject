@@ -1,11 +1,11 @@
 # AppInject
 
-开发库的基本框架，让你无需纠结 Context 的获取和基本日志的打印功能
+开发库的基本框架，动态实现库的特征
 
 ## Use
 
 ```gradle
-implementation("io.github.clistery:appinject:1.4.5")
+implementation("io.github.clistery:appinject:1.5.0")
 ```
 
 ## For Library

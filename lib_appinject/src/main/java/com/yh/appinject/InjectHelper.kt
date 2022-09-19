@@ -2,7 +2,7 @@ package com.yh.appinject
 
 import android.os.Looper
 import android.os.isCurrentLooper
-import com.yh.appbasic.init.BasicInitializer
+import com.yh.appbasic.initializer.AppBasicShare
 
 /**
  * 库注入协助器
@@ -19,7 +19,7 @@ import com.yh.appbasic.init.BasicInitializer
  *
  * Created by CYH on 2019-08-02 08:53
  */
-open class InjectHelper<Inject : IBaseAppInject> : BasicInitializer() {
+open class InjectHelper<Inject : IBaseAppInject> {
     
     /**
      * [Inject]
@@ -50,7 +50,7 @@ open class InjectHelper<Inject : IBaseAppInject> : BasicInitializer() {
         if(Looper.getMainLooper().isCurrentLooper) {
             internalShow(msg)
         } else {
-            runOnUiThread({ internalShow(msg) })
+            AppBasicShare.runOnUiThread({ internalShow(msg) })
         }
     }
     

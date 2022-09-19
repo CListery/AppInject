@@ -1,0 +1,13 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.yh.appinject////PointingToDeclaration/lib_appinject/com.yh.appinject/index.html
+$dokka.location:com.yh.appinject/IBaseAppInject///PointingToDeclaration/lib_appinject/com.yh.appinject/-i-base-app-inject/index.html
+$dokka.location:com.yh.appinject/IBaseAppInject/getNotificationIcon/#/PointingToDeclaration/lib_appinject/com.yh.appinject/-i-base-app-inject/get-notification-icon.html
+$dokka.location:com.yh.appinject/IBaseAppInject/showTipMsg/#kotlin.String/PointingToDeclaration/lib_appinject/com.yh.appinject/-i-base-app-inject/show-tip-msg.html
+$dokka.location:com.yh.appinject/InjectHelper///PointingToDeclaration/lib_appinject/com.yh.appinject/-inject-helper/index.html
+$dokka.location:com.yh.appinject/InjectHelper/InjectHelper/#/PointingToDeclaration/lib_appinject/com.yh.appinject/-inject-helper/-inject-helper.html
+$dokka.location:com.yh.appinject/InjectHelper/inject/#/PointingToDeclaration/lib_appinject/com.yh.appinject/-inject-helper/inject.html
+$dokka.location:com.yh.appinject/InjectHelper/register/#TypeParam(bounds=[com.yh.appinject.IBaseAppInject])/PointingToDeclaration/lib_appinject/com.yh.appinject/-inject-helper/register.html
+$dokka.location:com.yh.appinject/InjectHelper/showTipMsg/#kotlin.String/PointingToDeclaration/lib_appinject/com.yh.appinject/-inject-helper/show-tip-msg.html
+com.yh.appinject
+

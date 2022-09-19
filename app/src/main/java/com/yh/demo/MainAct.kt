@@ -4,7 +4,6 @@ import android.content.Intent
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.util.Log
-import com.yh.appbasic.logger.ILoggable
 import com.yh.appbasic.logger.logCursor
 import com.yh.appbasic.logger.logD
 import com.yh.appbasic.logger.logE
@@ -22,7 +21,7 @@ import com.yh.libapp.A
 /**
  * Created by CYH on 2020-03-13 14:24
  */
-class MainAct : ViewBindingActivity<ActMainBinding>(), ILoggable {
+class MainAct : ViewBindingActivity<ActMainBinding>() {
     
     override fun binderCreator(savedInstanceState: Bundle?) = ActMainBinding.inflate(layoutInflater)
     

@@ -1,43 +1,11 @@
-import com.clistery.src.AppConfig
 import com.clistery.src.AppDependencies
-import com.clistery.src.implementation
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-}
-
-android {
-    compileSdkVersion(AppConfig.compileSdk)
-    buildToolsVersion(AppConfig.buildToolsVersion)
-    
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
-    defaultConfig {
-        applicationId = "${AppConfig.GROUP_ID}.${AppConfig.ARTIFACT_ID}.demo"
-        minSdkVersion(AppConfig.minSdk)
-        targetSdkVersion(AppConfig.targetSdk)
-        versionCode(AppConfig.versionCode)
-        versionName(AppConfig.versionName)
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
+    id("app")
 }
 
 dependencies {
-    implementation(AppDependencies.baseLibs)
+    AppDependencies.baseLibs.forEach { implementation(it) }
     implementation(AppDependencies.androidx.appcompat)
     implementation(AppDependencies.androidx.livedata)
     implementation(AppDependencies.androidx.viewmodel)

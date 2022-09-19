@@ -9,11 +9,6 @@ object AppVersion {
         const val version = "1.5.0"
     }
     
-    object dokka {
-        
-        const val version = "1.4.32"
-    }
-    
     object androidx {
         
         const val coreKtx = "1.3.1"

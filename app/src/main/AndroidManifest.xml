@@ -37,12 +37,5 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service android:name=".server.TimerIntentServer" />
-        
-        <provider
-            android:name="com.yh.appinject.InjectHelper"
-            android:authorities="${applicationId}.Inject.Init"
-            android:enabled="true"
-            android:exported="false"
-            tools:replace="android:enabled" />
     </application>
 </manifest>
