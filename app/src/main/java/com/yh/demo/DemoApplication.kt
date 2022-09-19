@@ -13,18 +13,21 @@ import com.yh.libapp.Lib1Inject
 /**
  * Created by CYH on 2020-03-13 14:10
  */
-class DemoApplication : Application(), IBaseAppInject, Lib1Inject {
+class DemoApplication : Application() {
     
     private var sApp: DemoApplication? = null
     private var mCtx: Application? = null
     
-    override val lib1Number: Number get() = Math.random()
-    
-    override fun showTipMsg(msg: String) {
-        Toast.makeText(mCtx, msg, Toast.LENGTH_SHORT).show()
+    private inner class InjectImpl : IBaseAppInject, Lib1Inject {
+        
+        override val lib1Number: Number get() = Math.random()
+        
+        override fun showTipMsg(msg: String) {
+            Toast.makeText(mCtx, msg, Toast.LENGTH_SHORT).show()
+        }
+        
+        override fun getNotificationIcon(): Int = R.mipmap.ic_launcher
     }
-    
-    override fun getNotificationIcon(): Int = R.mipmap.ic_launcher
     
     override fun onCreate() {
         super.onCreate()
@@ -41,8 +44,6 @@ class DemoApplication : Application(), IBaseAppInject, Lib1Inject {
         AppLogger.off()
         LibLogger.off()
         
-        Lib1.apply {
-            register(this@DemoApplication)
-        }
+        Lib1.register(InjectImpl())
     }
 }
